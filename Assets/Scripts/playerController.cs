@@ -6,12 +6,15 @@ namespace Player
     {
         private Animator animatorPlayer;
         private float speed;
+        private float jump;
         private Vector3 scale;
+        private BoxCollider2D collider;
 
         private void Start()
         {
             scale = transform.localScale;
             animatorPlayer = GetComponent<Animator>();
+            collider = GetComponent<BoxCollider2D>();
         }
         private void Update()
         {
@@ -26,6 +29,21 @@ namespace Player
             {
                 scale.x = Mathf.Abs(scale.x);
                 transform.localScale = scale;
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                //play corch animation
+                collider.offset = new Vector2(-0.05f , 0.5f);
+                collider.size = new Vector2(0.7f, 1.2f);
+                animatorPlayer.SetBool("Crouch", true);
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftControl))
+            {
+                //stop corch animation
+                collider.offset = new Vector2(0f, 1f);
+                collider.size = new Vector2(0.5f, 2f);
+                animatorPlayer.SetBool("Crouch", false);
             }
         }
     }
