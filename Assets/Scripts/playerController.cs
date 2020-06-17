@@ -6,7 +6,6 @@ namespace Player
     {
         private Animator animatorPlayer;
         private float speed;
-        private float jump;
         private Vector3 scale;
         private BoxCollider2D collider;
 
